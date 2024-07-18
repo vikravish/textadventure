@@ -13,19 +13,19 @@ public class App {
         System.out.println("Welcome to your new adventure!");
         System.out.println("Choose your Pokemon: Snivy, Charmander, Squirtle");
         Scanner scanner = new Scanner(System.in);
-        String writtenPokemon = scanner.nextLine();
+        String writtenPokemon = scanner.nextLine().trim();
         Pokemon pokemon = null;
         //System.out.println(writtenPokemon);
         for (int character : writtenPokemon.codePoints().toArray()) {
             System.out.println("[\u001b[41m" + Character.valueOf((char)character) + "\u001b[0m]");
         }
-        if (!writtenPokemon.equals("Snivy") || !writtenPokemon.equals("Charmander") ||!writtenPokemon.equals("Squirtle")Snivy) {
+        if (!writtenPokemon.equals("Snivy") && !writtenPokemon.equals("Charmander") && !writtenPokemon.equals("Squirtle")) {
             System.out.println("Please choose a valid Pokemon");
             System.exit(0);
             System.out.println("test");
         }
         PokemonType type = null;
-        if (writtenPokemon == "Snivy") {
+        if (writtenPokemon.equals("Snivy")) {
             type = PokemonType.SNIVY;
         }
         if (writtenPokemon == "Charmander") {
@@ -40,31 +40,33 @@ public class App {
                 .println("Choose three attacks: (Note: Elemental attacks may be disadvantaged against other Pokemon)");
         if (type == PokemonType.CHARMANDER) {
             List<String> availableMoves = List.of("Ember", "Flamethrower", "Punch", "Tail Whip");
-            System.out.print("Please choose one of the following attacks:");
+            System.out.println("Please choose one of the following attacks:");
             for (String attackType : availableMoves) {
-                System.out.print(attackType);
+                System.out.println(attackType);
             }
         }
         if (type == PokemonType.SNIVY) {
             List<String> availableMoves = List.of("Vine Whip", "Seed Bomb", "Punch", "Tail Whip");
-            System.out.print("Please choose one of the following attacks:");
+            System.out.println("Please choose one of the following attacks:");
             for (String attackType : availableMoves) {
-                System.out.print(attackType);
+                System.out.println(attackType);
             }
         }
         if (type == PokemonType.SQUIRTLE) {
 
             List<String> availableMoves = List.of("Aqua Jet", "Water Pulse", "Punch", "Tail Whip");
-            System.out.print("Please choose one of the following attacks:");
+            System.out.println("Please choose one of the following attacks:");
             for (String attackType : availableMoves) {
-                System.out.print(attackType);
+                System.out.println(attackType);
             }
         }
         String[] attacksString = new String[3];
         for (int i = 1; i <= 3; i++) {
-            attacksString[i] = scanner.nextLine();
+            System.out.println("Please choose attack #" + i);
+            attacksString[i-1] = scanner.nextLine();
             if (i == 3) {
                 System.out.println("Thank you for choosing your attacks.");
+                break;
             }
         }
         List<Object> attackList = new ArrayList<>();
