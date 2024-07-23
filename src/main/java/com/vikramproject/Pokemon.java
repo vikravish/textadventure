@@ -11,12 +11,13 @@ public class Pokemon {
     PokemonType type;
     List<Object> attackSlots;
     int level;
-    int hp = level * 100;
+    int hp;
     public Pokemon(String name, PokemonType type, List<Object> attackSlots, int level){
         this.name = name; //the name given to the Pokemon by the player
         this.type = type; //the Pokemon that the player chooses
         this.attackSlots = attackSlots;
         this.level = level;
+        this.hp = level * 100;
     }
 
     public static Map<String, AttackTypes> allAttackTypesWithName = Map.ofEntries(

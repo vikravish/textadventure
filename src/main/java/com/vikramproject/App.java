@@ -92,7 +92,7 @@ public class App {
     }
 
     public static void battle(){
-
+        
     }
     public static void main(String[] args) {
         makePokemon();
