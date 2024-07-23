@@ -2,6 +2,7 @@ package com.vikramproject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 /**
@@ -15,23 +16,26 @@ public class App {
         Scanner scanner = new Scanner(System.in);
         String writtenPokemon = scanner.nextLine().trim();
         Pokemon pokemon = null;
-        //System.out.println(writtenPokemon);
+        // System.out.println(writtenPokemon);
         for (int character : writtenPokemon.codePoints().toArray()) {
-            System.out.println("[\u001b[41m" + Character.valueOf((char)character) + "\u001b[0m]");
+            System.out.println("[\u001b[41m" + java.lang.Character.valueOf((char) character) + "\u001b[0m]");
         }
-        if (!writtenPokemon.equals("Snivy") && !writtenPokemon.equals("Charmander") && !writtenPokemon.equals("Squirtle")) {
+        if (!writtenPokemon.equals("Snivy") && !writtenPokemon.equals("Charmander")
+                && !writtenPokemon.equals("Squirtle")) {
+            // Input: Rock | Output: True && True && True = True / Input: Snivy | Output:
+            // False && True && True = False
             System.out.println("Please choose a valid Pokemon");
-            System.exit(0);
-            System.out.println("test");
+            return;
+            // System.out.println("test");
         }
         PokemonType type = null;
         if (writtenPokemon.equals("Snivy")) {
             type = PokemonType.SNIVY;
         }
-        if (writtenPokemon == "Charmander") {
+        if (writtenPokemon.equals("Charmander")) {
             type = PokemonType.CHARMANDER;
         }
-        if (writtenPokemon == "Squirtle") {
+        if (writtenPokemon.equals("Squirtle")) {
             type = PokemonType.SQUIRTLE;
         }
         System.out.println("Please name your Pokemon:");
@@ -60,10 +64,10 @@ public class App {
                 System.out.println(attackType);
             }
         }
-        String[] attacksString = new String[3];
+        String[] rawChosenAttacks = new String[3];
         for (int i = 1; i <= 3; i++) {
             System.out.println("Please choose attack #" + i);
-            attacksString[i-1] = scanner.nextLine();
+            rawChosenAttacks[i - 1] = scanner.nextLine();
             if (i == 3) {
                 System.out.println("Thank you for choosing your attacks.");
                 break;
@@ -71,42 +75,28 @@ public class App {
         }
         List<Object> attackList = new ArrayList<>();
         for (int i = 0; i < 3; i++) {
-            if (attacksString[i].equals("Aqua Jet")) {
-                attackList.add(i, AttackTypes.AQUA_JET);
-            }
-            if (attacksString[i].equals("Water Pulse")) {
-                attackList.add(i, AttackTypes.WATER_PULSE);
-            }
-            if (attacksString[i].equals("Vine Whip")) {
-                attackList.add(i, AttackTypes.VINE_WHIP);
-            }
-            if (attacksString[i].equals("Seed Bomb")) {
-                attackList.add(i, AttackTypes.SEED_BOMB);
-            }
-            if (attacksString[i].equals("Ember")) {
-                attackList.add(i, AttackTypes.EMBER);
-            }
-            if (attacksString[i].equals("Flamethrower")) {
-                attackList.add(i, AttackTypes.FLAMETHROWER);
-            }
-            if (attacksString[i].equals("Punch")) {
-                attackList.add(i, AttackTypes.PUNCH);
-            }
-            if (attacksString[i].equals("Tail Whip")) {
-                attackList.add(i, AttackTypes.TAIL_WHIP);
-            }
+            String rawChosenAttack = rawChosenAttacks[i];
+            Pokemon.allAttackTypesWithName.forEach((attackName, attackType) -> {
+                if (rawChosenAttack.equals(attackName))
+                    attackList.add(attackType);
+            });
         }
-        pokemon = new Pokemon(name, type, attackList);
+        pokemon = new Pokemon(name, type, attackList, 1);
         System.out.println("You have chosen the Pokemon: " + pokemon.type + ", with the name: " + pokemon.name);
         System.out.println("Your Pokemon '" + pokemon.name + "' can use the following moves:");
         for (int i = 0; i < 3; i++) {
-            System.out.println(attacksString[i]);
+            System.out.println(rawChosenAttacks[i]);
         }
         System.out.println("Good luck on your adventure!");
 
     }
 
+    public static void battle(){
+
+    }
     public static void main(String[] args) {
         makePokemon();
+        battle();
     }
+
 }
