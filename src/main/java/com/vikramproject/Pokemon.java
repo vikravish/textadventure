@@ -7,13 +7,12 @@ import java.util.stream.Stream;
 
 
 public class Pokemon {
-    String name;
     PokemonType type;
-    List<Object> attackSlots;
+    List<AttackTypes> attackSlots;
     int level;
     int hp;
-    public Pokemon(String name, PokemonType type, List<Object> attackSlots, int level){
-        this.name = name; //the name given to the Pokemon by the player
+    boolean random = false;
+    public Pokemon(PokemonType type, List<AttackTypes> attackSlots, int level){
         this.type = type; //the Pokemon that the player chooses
         this.attackSlots = attackSlots;
         this.level = level;
@@ -42,5 +41,14 @@ public class Pokemon {
             return null;
         }
         return resultFound.get(0).getKey();
+    }
+    /**
+     * inflicts the attack on the other pokemon, changes the HP of the receiver as
+     * well as manages effectivity
+     * 
+     * @param attack
+     */
+    public static void use(AttackTypes attack, Pokemon receiever) {
+        
     }
 }

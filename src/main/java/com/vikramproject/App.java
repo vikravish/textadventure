@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.random.RandomGenerator;
 
 /**
  * Hello world!
@@ -15,7 +16,7 @@ public class App {
         System.out.println("Choose your Pokemon: Snivy, Charmander, Squirtle");
         Scanner scanner = new Scanner(System.in);
         String writtenPokemon = scanner.nextLine().trim();
-        Pokemon pokemon = null;
+        PlayerPokemon pokemon = null;
         // System.out.println(writtenPokemon);
         for (int character : writtenPokemon.codePoints().toArray()) {
             System.out.println("[\u001b[41m" + java.lang.Character.valueOf((char) character) + "\u001b[0m]");
@@ -73,7 +74,7 @@ public class App {
                 break;
             }
         }
-        List<Object> attackList = new ArrayList<>();
+        List<AttackTypes> attackList = new ArrayList<>();
         for (int i = 0; i < 3; i++) {
             String rawChosenAttack = rawChosenAttacks[i];
             Pokemon.allAttackTypesWithName.forEach((attackName, attackType) -> {
@@ -81,7 +82,7 @@ public class App {
                     attackList.add(attackType);
             });
         }
-        pokemon = new Pokemon(name, type, attackList, 1);
+        pokemon = new PlayerPokemon(name, type, attackList, 1, false);
         System.out.println("You have chosen the Pokemon: " + pokemon.type + ", with the name: " + pokemon.name);
         System.out.println("Your Pokemon '" + pokemon.name + "' can use the following moves:");
         for (int i = 0; i < 3; i++) {
@@ -91,9 +92,92 @@ public class App {
 
     }
 
-    public static void battle(){
-        
+    public static Player player = new Player();
+
+    // TODO
+    // 1. Get the element type for each pokemon (would have to add this to the
+    // Pokemon class)
+    // 2. Get the stats and information from the player and the opponent
+    // 3. Create the text interface and dialogue
+    // 4. Make a system for taking away or adding health to each Pokemon
+    // 5. Make a system for leveling up/adding exp
+    public static void battle() {
+        // Create random Pokemon
+        Pokemon randomPokemon = new Pokemon(PokemonType.SNIVY, List.of(AttackTypes.VINE_WHIP, AttackTypes.PUNCH),
+                0);
+        // Retrieve element type for every Pokemon
+        String playerPokemonElement = "water";
+        String randomPokemonElement = "grass";
+        // Launch dialogue (Fight or run)
+        System.out.println("A wild Pokemon has appeared! Fight or run?");
+        Scanner scanner = new Scanner(System.in);
+        String decision = scanner.nextLine();
+        if (decision == "fight") {
+            fight(randomPokemon);
+        } else {
+            run(randomPokemon);
+        }
+        // Fight sequence (Random roll to who goes first)
+        String firstMove = "Player";
+        // Give rewards
     }
+
+    public static void fight(Pokemon randomPokemon) {
+        double roll = Math.random();
+        String firstMove;
+        String secondMove;
+
+        if (roll > 0.4) {
+            firstMove = "Player"; // 60% chance that the player goes first
+        } else {
+            randomPokemonAttack(randomPokemon);
+
+        }
+        System.out.println("What move will " + player.getCurrentPokemon() + " use?");
+        for (int i = 0; i < player.getCurrentPokemon().attackSlots.size(); i++) {
+            if (i < player.getCurrentPokemon().attackSlots.size() - 1) {
+                System.out.print(player.getCurrentPokemon().attackSlots.get(i) + ", ");
+            } else {
+                System.out.print(player.getCurrentPokemon().attackSlots.get(i));
+            }
+        }
+        Scanner scanner = new Scanner(System.in);
+        String currentAttack = scanner.nextLine();
+        if(Pokemon.allAttackTypesWithName.containsKey(currentAttack)){
+            use(currentAttack);
+        }else{
+            System.out.println("Please input a valid attack.");
+            currentAttack = scanner.nextLine();
+        }
+    }
+
+    public static void run(Pokemon randomPokemon) {
+        if (randomPokemon.random == false) {
+            System.out.println("You cannot run from this battle.");
+        } else {
+            System.out.println("Successfully got away.");
+        }
+    }
+
+    /**
+     * TODO: `use` is missing receiver
+     * 
+     * @param randomPokemon
+     */
+    public static void randomPokemonAttack(Pokemon randomPokemon) {
+        double roll = Math.random();
+        if (roll > 0.67) {
+            use(randomPokemon.attackSlots.get(0), null);
+        } else if (roll > 0.33) {
+            use(randomPokemon.attackSlots.get(1), null);
+        } else {
+            use(randomPokemon.attackSlots.get(2), null);
+        }
+    }
+
+    
+    
+
     public static void main(String[] args) {
         makePokemon();
         battle();

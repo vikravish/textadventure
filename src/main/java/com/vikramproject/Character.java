@@ -5,7 +5,12 @@ import java.util.List;
 
 public class Character {
     String name = "";
-    ArrayList<Pokemon> pokedex = new ArrayList<Pokemon>();
     int level;
+    int currentPokemonIndex = -1;
+    ArrayList<Pokemon> inventory = new ArrayList<Pokemon>();
+    public Pokemon getCurrentPokemon(){
+        
+        return inventory.get(currentPokemonIndex);
+    }
 }
 

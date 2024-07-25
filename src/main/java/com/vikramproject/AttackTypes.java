@@ -1,5 +1,7 @@
 package com.vikramproject;
 
+import java.util.Map;
+
 public enum AttackTypes {
     VINE_WHIP,
     SEED_BOMB,
@@ -10,3 +12,4 @@ public enum AttackTypes {
     AQUA_JET,
     WATER_PULSE,
 }
+
