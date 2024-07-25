@@ -5,3 +5,5 @@ public enum PokemonType{
         CHARMANDER,
         SQUIRTLE,
     }
+
+    //Should map elements to these Pokemon

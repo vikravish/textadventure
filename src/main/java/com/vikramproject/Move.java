@@ -10,3 +10,5 @@ public class Move {
 
 
 }
+
+//not needed if can be put in with map

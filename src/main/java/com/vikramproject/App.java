@@ -10,13 +10,17 @@ import java.util.random.RandomGenerator;
  * Hello world!
  *
  */
+
 public class App {
-    public static void makePokemon() {
+    public static Player player = null;
+    public static void startPokemon() {
         System.out.println("Welcome to your new adventure!");
-        System.out.println("Choose your Pokemon: Snivy, Charmander, Squirtle");
+        System.out.println("What is your name?");
         Scanner scanner = new Scanner(System.in);
+        String playerName = scanner.nextLine(); 
+        System.out.println("Choose your Pokemon: Snivy, Charmander, Squirtle");
         String writtenPokemon = scanner.nextLine().trim();
-        PlayerPokemon pokemon = null;
+        PlayerPokemon firstPokemon = null;
         // System.out.println(writtenPokemon);
         for (int character : writtenPokemon.codePoints().toArray()) {
             System.out.println("[\u001b[41m" + java.lang.Character.valueOf((char) character) + "\u001b[0m]");
@@ -82,17 +86,18 @@ public class App {
                     attackList.add(attackType);
             });
         }
-        pokemon = new PlayerPokemon(name, type, attackList, 1, false);
-        System.out.println("You have chosen the Pokemon: " + pokemon.type + ", with the name: " + pokemon.name);
-        System.out.println("Your Pokemon '" + pokemon.name + "' can use the following moves:");
+        firstPokemon = new PlayerPokemon(name, type, attackList, 1, false);
+        System.out.println("You have chosen the Pokemon: " + firstPokemon.type + ", with the name: " + firstPokemon.name);
+        System.out.println("Your Pokemon '" + firstPokemon.name + "' can use the following moves:");
         for (int i = 0; i < 3; i++) {
             System.out.println(rawChosenAttacks[i]);
         }
+        ArrayList<PlayerPokemon> pokedex = new ArrayList<PlayerPokemon>();
+        player = new Player(name, 1, 0, null, 0, null);
         System.out.println("Good luck on your adventure!");
 
     }
-
-    public static Player player = new Player();
+    
 
     // TODO
     // 1. Get the element type for each pokemon (would have to add this to the
@@ -126,6 +131,7 @@ public class App {
         double roll = Math.random();
         String firstMove;
         String secondMove;
+
 
         if (roll > 0.4) {
             firstMove = "Player"; // 60% chance that the player goes first
@@ -179,7 +185,7 @@ public class App {
     
 
     public static void main(String[] args) {
-        makePokemon();
+        startPokemon();
         battle();
     }
 
