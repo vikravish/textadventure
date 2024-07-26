@@ -1,9 +1,9 @@
 package com.vikramproject;
 
-public enum PokemonType{
-        SNIVY,
-        CHARMANDER,
-        SQUIRTLE,
-    }
+public enum PokemonType {
+    SNIVY,
+    CHARMANDER,
+    SQUIRTLE,
+}
 
-    //Should map elements to these Pokemon
+// Should map elements to these Pokemon

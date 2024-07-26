@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
-import java.util.random.RandomGenerator;
+// import java.util.random.RandomGenerator;
 
 /**
  * Hello world!
@@ -13,11 +13,12 @@ import java.util.random.RandomGenerator;
 
 public class App {
     public static Player player = null;
+
     public static void startPokemon() {
         System.out.println("Welcome to your new adventure!");
         System.out.println("What is your name?");
         Scanner scanner = new Scanner(System.in);
-        String playerName = scanner.nextLine(); 
+        String playerName = scanner.nextLine();
         System.out.println("Choose your Pokemon: Snivy, Charmander, Squirtle");
         String writtenPokemon = scanner.nextLine().trim();
         PlayerPokemon firstPokemon = null;
@@ -87,17 +88,17 @@ public class App {
             });
         }
         firstPokemon = new PlayerPokemon(name, type, attackList, 1, false);
-        System.out.println("You have chosen the Pokemon: " + firstPokemon.type + ", with the name: " + firstPokemon.name);
+        System.out
+                .println("You have chosen the Pokemon: " + firstPokemon.type + ", with the name: " + firstPokemon.name);
         System.out.println("Your Pokemon '" + firstPokemon.name + "' can use the following moves:");
         for (int i = 0; i < 3; i++) {
             System.out.println(rawChosenAttacks[i]);
         }
         ArrayList<PlayerPokemon> pokedex = new ArrayList<PlayerPokemon>();
-        player = new Player(name, 1, 0, null, 0, null);
+        // player = new Player(name, 1, 0, null, 0, null);
         System.out.println("Good luck on your adventure!");
 
     }
-    
 
     // TODO
     // 1. Get the element type for each pokemon (would have to add this to the
@@ -132,7 +133,6 @@ public class App {
         String firstMove;
         String secondMove;
 
-
         if (roll > 0.4) {
             firstMove = "Player"; // 60% chance that the player goes first
         } else {
@@ -149,9 +149,9 @@ public class App {
         }
         Scanner scanner = new Scanner(System.in);
         String currentAttack = scanner.nextLine();
-        if(Pokemon.allAttackTypesWithName.containsKey(currentAttack)){
-            use(currentAttack);
-        }else{
+        if (Pokemon.allAttackTypesWithName.containsKey(currentAttack)) {
+            // use(currentAttack);
+        } else {
             System.out.println("Please input a valid attack.");
             currentAttack = scanner.nextLine();
         }
@@ -172,21 +172,18 @@ public class App {
      */
     public static void randomPokemonAttack(Pokemon randomPokemon) {
         double roll = Math.random();
-        if (roll > 0.67) {
-            use(randomPokemon.attackSlots.get(0), null);
-        } else if (roll > 0.33) {
-            use(randomPokemon.attackSlots.get(1), null);
-        } else {
-            use(randomPokemon.attackSlots.get(2), null);
-        }
+        // if (roll > 0.67) {
+        //     use(randomPokemon.attackSlots.get(0), null);
+        // } else if (roll > 0.33) {
+        //     use(randomPokemon.attackSlots.get(1), null);
+        // } else {
+        //     use(randomPokemon.attackSlots.get(2), null);
+        // }
     }
 
-    
-    
-
-    public static void main(String[] args) {
-        startPokemon();
-        battle();
-    }
+    // public static void main(String[] args) {
+    //     startPokemon();
+    //     battle();
+    // }
 
 }
