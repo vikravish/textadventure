@@ -14,4 +14,3 @@ public enum AttackTypes {
     AQUA_JET,
     WATER_PULSE,
 }
-

@@ -7,8 +7,6 @@ public class Move {
     int damage;
     String element;
 
-
-
 }
 
-//not needed if can be put in with map
+// not needed if can be put in with map

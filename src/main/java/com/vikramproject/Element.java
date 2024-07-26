@@ -21,4 +21,4 @@ public enum Element {
     WATER
 }
 
-//ideally want to map this to AttackTypes
+// ideally want to map this to AttackTypes
