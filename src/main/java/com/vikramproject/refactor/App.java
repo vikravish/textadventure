@@ -114,8 +114,9 @@ public class App {
                     }
                 }
                 case "run" -> {
-                    var anyCharacterHasARandomPokemon = characters.stream().anyMatch(character -> character.getCurrentPokemon().get().isRandom == false);
-                    if (anyCharacterHasARandomPokemon) {
+                    var anyCharacterDoesNotHaveARandomPokemon = characters
+                    .stream().anyMatch(character -> character.getCurrentPokemon().get().isRandom == false);
+                    if (anyCharacterDoesNotHaveARandomPokemon) {
                         System.out.println("You cannot run from this battle.");
                     } else {
                         System.out.println("Successfully got away.");

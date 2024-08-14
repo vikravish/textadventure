@@ -17,6 +17,7 @@ public class Character {
 
     public void setCurrentPokemon(int index) {
         currentPokemonIndex = Optional.of(index);
+
     }
 
     /**
@@ -24,6 +25,11 @@ public class Character {
      * @return
      */
     public Optional<Pokemon> getCurrentPokemon() {
+       /* if(currentPokemonIndex.isPresent()){
+            return Optional.of(inventory.get(currentPokemonIndex.get()));
+        }else{
+            return Optional.empty();
+        } */
         return currentPokemonIndex.map(inventory::get);
     }
 
